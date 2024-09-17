@@ -13,7 +13,8 @@ if __name__ == "__main__":
                         type=str)
     # parser.add_argument("-c", "--client",
     #                     help="Don't use, under development. Defaults to requests package internally")
-    parser.add_argument("-t", "--threads")
+    parser.add_argument("-t", "--threads",
+                        type=int)
     parser.add_argument("-cz", "--chunk-size",
                         help="Chunk size in bytes. Specifies the size of the download and disk write chunk",
                         type=int)
@@ -22,8 +23,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    print(file_download(url=args.url,
-                        dest_path=args.destination_path,
-                        threads=args.threads,
-                        chunk_size=args.chunk_size,
-                        force_download=args.force_download))
+    file_download(url=args.url, dest_path=args.destination_path, threads=args.threads, chunk_size=args.chunk_size, force_download=args.force_download)

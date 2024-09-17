@@ -104,8 +104,8 @@ def prepare_download(url: str, dest_path: str, client, file_size: Optional[int] 
         os.makedirs(os.path.dirname(local_file_info.path), exist_ok=True)
 
     fd = FileDownload(url,
-                        local_file_info.path, os.path.basename(local_file_info.path),
-                        remote_file_info.size, download, remote_file_info.last_modified)
+                      local_file_info.path, os.path.basename(local_file_info.path),
+                      remote_file_info.size, download, remote_file_info.last_modified)
 
     return fd
 
@@ -134,6 +134,7 @@ def file_download(url: str,
     if progress_factory_fn:
         progress_fn = progress_factory_fn(download_info.filename, download_info.size)
 
+    global writer_queue
     writer_queue = queue.Queue()
 
     def _download_partition(start: int, size: int) -> None:
