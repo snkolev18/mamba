@@ -19,7 +19,7 @@ pip3 install -r requirements.txt
 You can also symlink once you complete the installation:
 ```shell
 chmod +x ./mamba
-ln -s $(pwd)/mamba /usr/bin/mamba
+sudo ln -s $(pwd)/mamba /usr/bin/mamba
 ```
 
 Happy Downloading!
