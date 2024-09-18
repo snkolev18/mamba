@@ -16,5 +16,10 @@ python3 -m venv ./venv
 pip3 install -r requirements.txt
 ```
 
+You can also symlink once you complete the installation:
+```shell
+chmod +x ./mamba
+ln -s $(pwd)/mamba /usr/bin/mamba
+```
 
 Happy Downloading!

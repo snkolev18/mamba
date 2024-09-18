@@ -9,6 +9,7 @@ import threading
 from typing import Callable, Optional
 from urllib.parse import urlparse, unquote
 
+
 import requests
 import tqdm
 
@@ -98,7 +99,8 @@ def prepare_download(url: str, dest_path: str, client, file_size: Optional[int] 
         download = True
     if (remote_is_not_newer is None and sizes_equal) or (sizes_equal is None and remote_is_not_newer):
         download = False
-    assert download is not None
+
+    # assert download is not None
 
     if download:
         os.makedirs(os.path.dirname(local_file_info.path), exist_ok=True)
@@ -132,7 +134,7 @@ def file_download(url: str,
         return dest_path
 
     if progress_factory_fn:
-        progress_fn = progress_factory_fn(download_info.filename, download_info.size)
+        disk_write_progress_fn = progress_factory_fn(f"Writing {download_info.filename} to disk", download_info.size)
 
     global writer_queue
     writer_queue = queue.Queue()
@@ -151,8 +153,8 @@ def file_download(url: str,
                 fp.seek(start)
                 bytes_written = fp.write(chunk)
                 total_bytes_written += bytes_written
-                if progress_fn is not None:
-                    progress_fn(bytes_written)
+                if disk_write_progress_fn is not None:
+                    disk_write_progress_fn(bytes_written)
 
     partition_size = file_size // threads
     partitions = [
@@ -165,6 +167,7 @@ def file_download(url: str,
         for start, size in
         partitions
     ]
+
     for dt in download_threads:
         dt.start()
     writer_thread = threading.Thread(target=_write_chunks)
