@@ -1,5 +1,0 @@
-#!/bin/bash
-
-. /home/xlth/source/repos/mamba/venv/bin/activate
-
-python3 /home/xlth/source/repos/mamba/mamba.py "$@"
