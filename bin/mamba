@@ -1,0 +1,5 @@
+#!/bin/bash
+
+. ~/mamba/venv/bin/activate
+
+python3 ~/mamba/mamba.py "$@"
